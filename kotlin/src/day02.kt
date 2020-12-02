@@ -29,13 +29,7 @@ fun main() {
 }
 
 fun checkPasswordComplianceToPolicy1(policy: PasswordPolicy): Boolean {
-    var rep = 0
-    for (c in policy.password) {
-        if (c == policy.letter) {
-            rep++
-        }
-    }
-    return policy.repetitionRange.first <= rep && rep <= policy.repetitionRange.second
+    return policy.password.count { it == policy.letter } in (policy.repetitionRange.first..policy.repetitionRange.second)
 }
 
 fun checkPasswordComplianceToPolicy2(policy: PasswordPolicy): Boolean {
