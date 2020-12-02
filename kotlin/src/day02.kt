@@ -15,14 +15,20 @@ fun main() {
         )
     }
 
-    val correctPasswords = passwordsPolicies.filter { checkPasswordComplianceToPolicy(it) }
-    if (correctPasswords.isNotEmpty())
-        println("Solved. The answer is ${correctPasswords.size}")
+    val correctPasswords1 = passwordsPolicies.filter { checkPasswordComplianceToPolicy1(it) }
+    if (correctPasswords1.isNotEmpty())
+        println("Solved. The answer is ${correctPasswords1.size}")
+    else
+        println("Keep Thinking")
+
+    val correctPasswords2 = passwordsPolicies.filter { checkPasswordComplianceToPolicy2(it) }
+    if (correctPasswords2.isNotEmpty())
+        println("Solved. The answer is ${correctPasswords2.size}")
     else
         println("Keep Thinking")
 }
 
-fun checkPasswordComplianceToPolicy(policy: PasswordPolicy): Boolean {
+fun checkPasswordComplianceToPolicy1(policy: PasswordPolicy): Boolean {
     var rep = 0
     for (c in policy.password) {
         if (c == policy.letter) {
@@ -30,4 +36,8 @@ fun checkPasswordComplianceToPolicy(policy: PasswordPolicy): Boolean {
         }
     }
     return policy.repetitionRange.first <= rep && rep <= policy.repetitionRange.second
+}
+
+fun checkPasswordComplianceToPolicy2(policy: PasswordPolicy): Boolean {
+    return (policy.password[policy.repetitionRange.first - 1] == policy.letter) xor (policy.password[policy.repetitionRange.second - 1] == policy.letter)
 }
