@@ -6,7 +6,7 @@ fun main() {
     val sortedArray = readInputDatatoList("input_data/day01.txt").sorted()
 
     findPairOfElements(0, sortedArray.size - 1, sortedArray, 2020)?.let {
-        println("Solved, The answer is " + (it.first * it.second))
+        println("Solved. The answer is " + (it.first * it.second))
     } ?: error("Keep thinking")
 
     findTripleOfElements(0, sortedArray.size - 1, sortedArray, 2020)?.let {
@@ -31,9 +31,9 @@ fun findPairOfElements(l: Int, r: Int, sortedArray: List<Int>, sum: Int): Pair<I
 
 fun findTripleOfElements(l: Int, r: Int, sortedArray: List<Int>, sum: Int): Triple<Int, Int, Int>? {
     for (i in sortedArray) {
-        val pair = findPairOfElements(l, r, sortedArray, sum - i)
-        if (pair != null)
-            return Triple(pair.first, pair.second, i)
+        findPairOfElements(l, r, sortedArray, sum - i)?.let {
+            return Triple(it.first, it.second, i)
+        }
     }
     return null
 }
