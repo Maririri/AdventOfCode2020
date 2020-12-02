@@ -18,7 +18,7 @@ fun findPairOfElements(l: Int, r: Int, sortedArray: List<Int>, sum: Int): Pair<I
     var l1 = l
     var r1 = r
 
-    while (l < r) {
+    while (l1 < r1) {
         val tempSum = sortedArray[l1] + sortedArray[r1]
         when {
             tempSum == sum -> break
