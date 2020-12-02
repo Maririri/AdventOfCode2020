@@ -8,6 +8,10 @@ fun main() {
     findPairOfElements(0, sortedArray.size - 1, sortedArray, 2020)?.let {
         println("Solved, The answer is " + (it.first * it.second))
     } ?: error("Keep thinking")
+
+    findTripleOfElements(0, sortedArray.size - 1, sortedArray, 2020)?.let {
+        println("Solved. The answer is " + (it.first * it.second * it.third))
+    } ?: println("Keep thinking")
 }
 
 fun findPairOfElements(l: Int, r: Int, sortedArray: List<Int>, sum: Int): Pair<Int, Int>? {
@@ -21,6 +25,15 @@ fun findPairOfElements(l: Int, r: Int, sortedArray: List<Int>, sum: Int): Pair<I
             tempSum < sum -> l1++
             tempSum > sum -> r1--
         }
+    }
+    return null
+}
+
+fun findTripleOfElements(l: Int, r: Int, sortedArray: List<Int>, sum: Int): Triple<Int, Int, Int>? {
+    for (i in sortedArray) {
+        val pair = findPairOfElements(l, r, sortedArray, sum - i)
+        if (pair != null)
+            return Triple(pair.first, pair.second, i)
     }
     return null
 }

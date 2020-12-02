@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import day1.findPairOfElements
+import day1.*
 
 
 class test_day01() {
@@ -9,6 +9,14 @@ class test_day01() {
         val testArray = listOf(1721, 299)
         findPairOfElements(0, testArray.size - 1, testArray, 2020)?.let {
             assertEquals(it.first + it.second, 2020)
+        }
+    }
+
+    @Test
+    fun checkThreeNumbers() {
+        val testArray = listOf(366, 675, 979)
+        findTripleOfElements(0, testArray.size - 1, testArray, 2020)?.let {
+            assertEquals(it.first + it.second + it.third, 2020)
         }
     }
 }
