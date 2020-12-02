@@ -1,9 +1,7 @@
-package day1
-
-import util.readInputDatatoList
+import util.readInputToSortedListInt
 
 fun main() {
-    val sortedArray = readInputDatatoList("input_data/day01.txt").sorted()
+    val sortedArray = readInputToSortedListInt("input_data/day01.txt")
 
     findPairOfElements(0, sortedArray.size - 1, sortedArray, 2020)?.let {
         println("Solved. The answer is " + (it.first * it.second))
