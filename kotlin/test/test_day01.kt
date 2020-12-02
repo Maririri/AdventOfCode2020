@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import day1.*
 
 
 class test_day01() {
