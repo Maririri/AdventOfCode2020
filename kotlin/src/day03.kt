@@ -5,16 +5,28 @@ data class Position(val x: Int, val y: Int)
 fun main() {
     val input = readInputToList("input_data/day03.txt")
     val listOfTrees = findAllTrees(input)
-    val treeCount = countTreesOnPath(input, listOfTrees)
-    if (treeCount > 0)
-        println("Solved. The answer is $treeCount")
+    val treeCount1 = countTreesOnPath(input, listOfTrees, 3, 1)
+    if (treeCount1 > 0)
+        println("Solved. The answer is $treeCount1")
+    else
+        println("Keep Thinking")
+
+    val treeCount2 : Long= countTreesOnPath(input, listOfTrees, 1, 1)*
+            countTreesOnPath(input, listOfTrees, 3, 1)*
+            countTreesOnPath(input, listOfTrees, 5, 1)*
+            countTreesOnPath(input, listOfTrees, 7, 1)*
+            countTreesOnPath(input, listOfTrees, 1, 2).toLong()
+    if (treeCount2 > 0)
+        println("Solved. The answer is $treeCount2")
     else
         println("Keep Thinking")
 }
 
 fun countTreesOnPath(
     input: List<String>,
-    listOfTrees: MutableList<Position>
+    listOfTrees: MutableList<Position>,
+    stepX: Int,
+    stepY: Int
 ): Int {
     val width = input[0].length
     val height = input.size
@@ -23,11 +35,11 @@ fun countTreesOnPath(
     var treeCount = 0
 
     while (j < height) {
-        if (i>=width)
-            i-=width
+        if (i >= width)
+            i -= width
 
         treeCount += listOfTrees.contains(Position(i, j)).toInt()
-        i += 3; j++
+        i += stepX; j += stepY
     }
     return treeCount
 }
