@@ -4,13 +4,30 @@ val requiredPassportFields = listOf(
     "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"
 )
 
+val validPassportFields = mapOf(
+    "byr" to """^(19[2-9]\d|200[0-2])$""".toRegex(),
+    "iyr" to """^(201\d|2020)$""".toRegex(),
+    "eyr" to """^(19[2-9]\d|200[0-2])$""".toRegex(),
+    "hgt" to """^(1[5-8]\d|19[0-3]\d)[cm]{2}$| |^(59|6\d|7[0-6])[in]{2}$""".toRegex(),
+    "hcl" to """^#([0-9]|[a-f]){6}$""".toRegex(),
+    "ecl" to """^(amb|blu|brn|gry|grn|hzl|oth)$""".toRegex(),
+    "pid" to """^[0-9]{9}$""".toRegex()
+)
+
 fun main() {
     val inputToString = File("input_data/day04.txt").readText()
     val listOfPassports = processPassToListMap(inputToString)
-    val numOfValidPass = listOfPassports.count { isPassportValid(it) }
+    val numOfValidPass1 = listOfPassports.count { isPassportValid(it) }
 
-    if (numOfValidPass > 0)
-        println("Solved. The answer is $numOfValidPass")
+    if (numOfValidPass1 > 0)
+        println("Solved. The answer is $numOfValidPass1")
+    else
+        println("Keep Thinking")
+
+    val numOfValidPass2 = listOfPassports.count { isPassportValid(it) && arePassportFieldsValid(it) }
+
+    if (numOfValidPass2 > 0)
+        println("Solved. The answer is $numOfValidPass2")
     else
         println("Keep Thinking")
 }
@@ -35,5 +52,11 @@ fun processPassToListMap(inputToString: String): List<Map<String, String>> {
 fun isPassportValid(pass: Map<String, String>): Boolean {
     return requiredPassportFields.all {
         pass.containsKey(it)
+    }
+}
+
+fun arePassportFieldsValid(pass: Map<String, String>): Boolean {
+    return validPassportFields.all {
+        pass[it.key]!!.matches(it.value)
     }
 }
