@@ -6,6 +6,16 @@ val requiredPassportFields = listOf(
 
 fun main() {
     val inputToString = File("input_data/day04.txt").readText()
+    val listOfPassports = processPassToListMap(inputToString)
+    val numOfValidPass = listOfPassports.count { isPassportValid(it) }
+
+    if (numOfValidPass > 0)
+        println("Solved. The answer is $numOfValidPass")
+    else
+        println("Keep Thinking")
+}
+
+fun processPassToListMap(inputToString: String): List<Map<String, String>> {
     val listOfPass = inputToString.split("\n\n").map {
         it.replace('\n', ' ')
     }
@@ -19,13 +29,7 @@ fun main() {
                 null
         }.toMap()
     }
-
-    val numOfValidPass = mapOfPassports.count { isPassportValid(it) }
-
-    if (numOfValidPass > 0)
-        println("Solved. The answer is $numOfValidPass")
-    else
-        println("Keep Thinking")
+    return mapOfPassports
 }
 
 fun isPassportValid(pass: Map<String, String>): Boolean {

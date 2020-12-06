@@ -1,8 +1,10 @@
 import org.junit.jupiter.api.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class test_day04 {
     @Test
-    fun test1(){
+    fun test1() {
         val testData = "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\n" +
                 "byr:1937 iyr:2017 cid:147 hgt:183cm\n" +
                 "\n" +
@@ -17,5 +19,10 @@ class test_day04 {
                 "hcl:#cfa07d eyr:2025 pid:166559648\n" +
                 "iyr:2011 ecl:brn hgt:59in"
 
+        val testListOfPass = processPassToListMap(testData)
+        assertTrue { isPassportValid(testListOfPass[0]) }
+        assertFalse { isPassportValid(testListOfPass[1]) }
+        assertTrue { isPassportValid(testListOfPass[2]) }
+        assertFalse { isPassportValid(testListOfPass[3]) }
     }
 }
