@@ -1,48 +1,35 @@
-import util.readInputToList
+import java.io.File
 
-data class Passport(
-    val byr: Pair<Int, Boolean>,
-    val iyr: Pair<Int, Boolean>,
-    val eyr: Pair<Int, Boolean>,
-    val hgt: Pair<String, Boolean>,
-    val hcl: Pair<String, Boolean>,
-    val ecl: Pair<String, Boolean>,
-    val pid: Pair<Int, Boolean>,
-    val cid: Pair<Int, Boolean>
-) {
-    fun isValid(): Boolean {
-        return byr.second &&
-                iyr.second &&
-                eyr.second &&
-                hgt.second &&
-                hcl.second &&
-                ecl.second &&
-                pid.second
-    }
-}
+val requiredPassportFields = listOf(
+    "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"
+)
 
 fun main() {
-    val inputToList = readInputToList("input_data/day04.txt")
-    val listOfPassRaw = getAllRawPassports(inputToList)
-
-    for (i in listOfPassRaw) {
-        println(i)
-        println("-----------------------")
+    val inputToString = File("input_data/day04.txt").readText()
+    val listOfPass = inputToString.split("\n\n").map {
+        it.replace('\n', ' ')
     }
+
+    val mapOfPassports = listOfPass.map {
+        it.split(" ").mapNotNull { itt ->
+            if (itt.isNotBlank()) {
+                val entry = itt.split(":")
+                entry[0] to entry[1]
+            } else
+                null
+        }.toMap()
+    }
+
+    val numOfValidPass = mapOfPassports.count { isPassportValid(it) }
+
+    if (numOfValidPass > 0)
+        println("Solved. The answer is $numOfValidPass")
+    else
+        println("Keep Thinking")
 }
 
-fun getAllRawPassports(inputToList: List<String>): MutableList<MutableList<String>> {
-    val listOfPassRaw = mutableListOf<MutableList<String>>()
-    val tempList = mutableListOf<String>()
-
-    inputToList.forEach {
-        if (it.isNotBlank()) {
-            tempList.add(it)
-        } else {
-            listOfPassRaw.add(tempList.toCollection(mutableListOf()))
-
-            tempList.clear()
-        }
+fun isPassportValid(pass: Map<String, String>): Boolean {
+    return requiredPassportFields.all {
+        pass.containsKey(it)
     }
-    return listOfPassRaw
 }
