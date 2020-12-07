@@ -8,7 +8,7 @@ val validPassportFields = mapOf(
     "byr" to """^(19[2-9]\d|200[0-2])$""".toRegex(),
     "iyr" to """^(201\d|2020)$""".toRegex(),
     "eyr" to """^(202\d|2030)$""".toRegex(),
-    "hgt" to """^(1[5-8]\d|19[0-3]\d)cm$| |^(59|6\d|7[0-6])in$""".toRegex(),
+    "hgt" to """^(1[5-8]\d|19[0-3])cm$| |^(59|6\d|7[0-6])in$""".toRegex(),
     "hcl" to """^#([0-9a-f]){6}$""".toRegex(),
     "ecl" to """^(amb|blu|brn|gry|grn|hzl|oth)$""".toRegex(),
     "pid" to """^[0-9]{9}$""".toRegex()
