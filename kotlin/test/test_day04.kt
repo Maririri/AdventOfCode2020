@@ -47,7 +47,7 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719"""
     }
 
     @Test
-    fun testInalidPassPart2() {
+    fun testInvalidPassPart2() {
         val testData = """eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
 
