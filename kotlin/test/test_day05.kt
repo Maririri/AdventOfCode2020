@@ -10,4 +10,9 @@ class test_day05 {
         assertEquals(findSeatID(rows, columns, testData[2]), 119)
         assertEquals(findSeatID(rows, columns, testData[3]), 820)
     }
+
+    @Test
+    fun `test AOC Day 5 Part 2`(){
+        assertEquals(getMySeat(listOf(1,2,4)), 3)
+    }
 }

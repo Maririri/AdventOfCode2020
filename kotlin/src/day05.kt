@@ -11,9 +11,12 @@ fun main() {
     }.toList().sorted()
     println("${plainSeats.maxOrNull() ?: "Keep Thinking"}")
 
-    val mySeat = plainSeats.zipWithNext().filter { (it.second - it.first) == 2 }.single().first + 1
+    val mySeat = getMySeat(plainSeats)
     println(mySeat)
 }
+
+fun getMySeat(plainSeats: List<Int>) =
+    plainSeats.zipWithNext().filter { (it.second - it.first) == 2 }.single().first + 1
 
 fun divideRowAndCol(it: String): Pair<String, String> {
     val startCol = it.findAnyOf(listOf("L", "R"))
