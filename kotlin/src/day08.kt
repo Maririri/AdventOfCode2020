@@ -6,6 +6,9 @@ fun main() {
     val listOfPair = readInputToList(fileName).map {
         transformToInstrPair(it)
     }
+
+    println(listOfPair)
+
     val answer1 = findAcc1(listOfPair).first
 
     if (answer1 > 0)
@@ -66,13 +69,5 @@ fun findAcc2(listOfPair: List<Pair<String, Int>>): Int {
 
 fun transformToInstrPair(it: String): Pair<String, Int> {
     val pairStr = it.split(" ")
-    val instr = pairStr[0]
-    val valueStr = pairStr[1]
-    val plus = "+"; val minus = "-"
-    val value = when {
-        valueStr.startsWith(plus) -> valueStr.removePrefix(plus).toInt()
-        valueStr.startsWith(minus) -> 0 - valueStr.removePrefix(minus).toInt()
-        else -> null
-    }
-    return instr to value!!
+    return pairStr[0] to pairStr[1].toInt()
 }
