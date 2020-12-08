@@ -4,14 +4,15 @@ const val rows = 128
 const val columns = 8
 
 fun main() {
-    val plainSeats = mutableListOf<Int>()
-    readInputToList("input_data/day05.txt").map {
+    val plainSeats = readInputToList("input_data/day05.txt").map {
         divideRowAndCol(it)
-    }.forEach {
-        val seatID = findSeatID(rows, columns, it)
-        plainSeats.add(seatID)
-    }
+    }.map {
+        findSeatID(rows, columns, it)
+    }.toList().sorted()
     println("${plainSeats.maxOrNull() ?: "Keep Thinking"}")
+
+    val mySeat = plainSeats.zipWithNext().filter { (it.second - it.first) == 2 }.single().first + 1
+    println(mySeat)
 }
 
 fun divideRowAndCol(it: String): Pair<String, String> {
