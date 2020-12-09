@@ -1,3 +1,4 @@
+import util.readInputSplintByBlankLines
 import java.io.File
 
 fun main() {
@@ -15,7 +16,7 @@ fun main() {
         println("Keep Thinking")
 
     var numOfPositiveAnswers2 = 0
-    readInputSplintByBlankLines(fileStr).forEach {
+    inputList.forEach {
         numOfPositiveAnswers2 += checkAnswers2(it)
     }
 
@@ -35,4 +36,3 @@ fun checkAnswers2(it: String): Int {
     return numOfPositiveAnswers21
 }
 
-fun readInputSplintByBlankLines(input: String) = input.split("\n\n")
