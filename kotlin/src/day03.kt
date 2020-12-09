@@ -11,11 +11,10 @@ fun main() {
     else
         println("Keep Thinking")
 
-    val treeCount2 : Long= countTreesOnPath(input, listOfTrees, 1, 1)*
-            countTreesOnPath(input, listOfTrees, 3, 1)*
-            countTreesOnPath(input, listOfTrees, 5, 1)*
-            countTreesOnPath(input, listOfTrees, 7, 1)*
-            countTreesOnPath(input, listOfTrees, 1, 2).toLong()
+    val treeCount2 = listOf((1 to 1), (3 to 1), (5 to 1), (7 to 1), (1 to 2)).fold(1L) { acc, it ->
+        acc * countTreesOnPath(input, listOfTrees, it.first, it.second)
+    }
+
     if (treeCount2 > 0)
         println("Solved. The answer is $treeCount2")
     else
